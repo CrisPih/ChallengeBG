@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+
+:host {
+    @include mat.toolbar-overrides((container-background-color: rgb(1, 10, 136),
+            container-text-color: white,
+        ));
+}
+
+.spacer {
+    flex: 1;
+}
+
+.usuario {
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.salir {
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .usuario {
+        display: none;
+    }
+}

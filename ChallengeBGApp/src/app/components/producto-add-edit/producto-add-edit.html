@@ -1,0 +1,68 @@
+<h2 mat-dialog-title>
+    @if (isEditMode()) { Editar producto } @else { Nuevo producto }
+</h2>
+
+<mat-dialog-content>
+    <div class="formProducto">
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput [formField]="productoForm.nombre">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <input matInput [formField]="productoForm.descripcion">
+        </mat-form-field>
+
+        <h3>Precios por proveedor</h3>
+
+        @for (precio of productoForm.precios; track $index) {
+        <div class="filaPrecio">
+            <mat-form-field appearance="outline">
+                <mat-label>Proveedor</mat-label>
+                <mat-select [formField]="precio.proveedorId">
+                    @for (proveedor of proveedores(); track proveedor.id) {
+                    <mat-option value="{{proveedor.id}}">{{proveedor.nombre}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Lote</mat-label>
+                <input matInput [formField]="precio.numeroLote">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Precio</mat-label>
+                <input matInput type="number" [formField]="precio.precio">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Stock</mat-label>
+                <input matInput type="number" [formField]="precio.stock">
+            </mat-form-field>
+
+            <button mat-icon-button type="button" aria-label="Quitar precio"
+                [disabled]="productoModel().precios.length === 1" (click)="removePrecio($index)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+        }
+
+        <button matButton="outlined" type="button" (click)="addPrecio()">
+            <mat-icon>add</mat-icon>
+            Agregar precio
+        </button>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button matButton="outlined" (click)="close()">
+        <mat-icon>close</mat-icon>
+        Cancelar
+    </button>
+    <button matButton="filled" [disabled]="productoForm().invalid() || guardando()" (click)="save()">
+        <mat-icon>save</mat-icon>
+        Guardar
+    </button>
+</mat-dialog-actions>

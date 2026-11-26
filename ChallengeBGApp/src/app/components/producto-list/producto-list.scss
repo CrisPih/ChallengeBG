@@ -1,0 +1,45 @@
+.container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: auto;
+
+    .container-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .filtro {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .tabla {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    .precio {
+        padding: 2px 0;
+    }
+
+    .sin-datos {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 16px;
+    }
+
+    .mat-column-descripcion {
+        display: none;
+    }
+}

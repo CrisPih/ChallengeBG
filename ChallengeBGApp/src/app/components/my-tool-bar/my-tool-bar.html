@@ -1,0 +1,10 @@
+<mat-toolbar>
+    <span>Inventario de productos</span>
+    <span class="spacer"></span>
+    @if (authService.isLoggedIn()) {
+    <span class="usuario">{{ authService.nombreCompleto() }}</span>
+    <button mat-icon-button class="salir" aria-label="Cerrar sesión" (click)="authService.logout()">
+        <mat-icon>logout</mat-icon>
+    </button>
+    }
+</mat-toolbar>

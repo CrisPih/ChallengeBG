@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ChallengeBG.Api/ChallengeBG.Api.csproj" />
+  <Project Path="ChallengeBG.Application/ChallengeBG.Application.csproj" />
+  <Project Path="ChallengeBG.Domain/ChallengeBG.Domain.csproj" />
+  <Project Path="ChallengeBG.Infrastructure/ChallengeBG.Infrastructure.csproj" />
+</Solution>
