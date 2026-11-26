@@ -29,12 +29,34 @@
             <ng-container matColumnDef="precios">
                 <th mat-header-cell *matHeaderCellDef> Precios por proveedor </th>
                 <td mat-cell *matCellDef="let row">
+                    <table class="tablaPrecios">
+                                            <thead>
+                            <tr>
+                                <th>Proveedor</th>
+                                <th>Lote</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (precio of row.precios; track $index) {
+                            <tr>
+                                <td>{{precio.proveedorNombre}}</td>
+                                <td>{{precio.numeroLote}}</td>
+                                <td>{{precio.precio | currency}}</td>
+                                <td>{{precio.stock}}</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <!-- 
                     @for (precio of row.precios; track $index) {
                     <div class="precio">
                         {{precio.proveedorNombre}} - Lote {{precio.numeroLote}} -
-                        {{precio.precio | currency}} - Stock {{precio.stock}}
+                        {{precio.precio | currency}} - {{precio.precioConIva | currency}} - Stock {{precio.stock}}
                     </div>
                     }
+                    -->
                 </td>
             </ng-container>
 

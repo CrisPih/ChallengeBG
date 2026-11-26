@@ -13,6 +13,8 @@
                     <mat-label>Clave</mat-label>
                     <input matInput type="password" autocomplete="current-password" [formField]="loginForm.clave">
                 </mat-form-field>
+                
+                @if (mensajeError()) {<p class="mensajeError">{{ mensajeError() }}</p>}
 
                 <button matButton="filled" type="submit" [disabled]="loginForm().invalid() || cargando()">
                     Ingresar

@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { form, required, FormField } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,6 +27,7 @@ export class Login {
   })
 
   protected cargando = signal(false)
+  protected mensajeError = signal('')
 
   login(event: Event): void {
     event.preventDefault()

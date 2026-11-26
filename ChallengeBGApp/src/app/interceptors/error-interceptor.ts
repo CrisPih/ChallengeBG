@@ -11,11 +11,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       console.error(`Error ${error.status} en ${req.method} ${req.url}`, error);
-
-      const sesionVencida = error.status === 401 && !req.url.endsWith('/auth/login');
+      const esLogin = req.url.endsWith('/auth/login');
+      const sesionVencida = error.status === 401 && !esLogin;
       if (sesionVencida) authService.logout();
 
-      snackBar.open(getMensaje(error, sesionVencida), 'Cerrar', { duration: 5000 });
+      if (!esLogin) snackBar.open(getMensaje(error, sesionVencida), 'Cerrar', { duration: 5000 });
 
       return throwError(() => error);
     })
