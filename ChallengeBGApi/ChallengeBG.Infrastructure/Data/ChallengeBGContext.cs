@@ -12,6 +12,8 @@ public partial class ChallengeBGContext : DbContext
     {
     }
 
+    public virtual DbSet<Categoria> Categoria { get; set; }
+
     public virtual DbSet<Producto> Producto { get; set; }
 
     public virtual DbSet<ProductoProveedor> ProductoProveedor { get; set; }
@@ -22,6 +24,20 @@ public partial class ChallengeBGContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Categoria>(entity =>
+        {
+            entity.HasKey(e => e.CategoriaId).HasName("PK__Categori__F353C1C5AF47CB0F");
+
+            entity.HasIndex(e => e.Nombre, "UQ__Categori__75E3EFCFF763A509").IsUnique();
+
+            entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<Producto>(entity =>
         {
             entity.HasKey(e => e.ProductoId).HasName("PK__Producto__A430AEA39BCBE434");
@@ -37,6 +53,11 @@ public partial class ChallengeBGContext : DbContext
             entity.Property(e => e.Nombre)
                 .HasMaxLength(150)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.Categoria).WithMany(p => p.Producto)
+                .HasForeignKey(d => d.CategoriaId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Producto__Catego__5DCAEF64");
         });
 
         modelBuilder.Entity<ProductoProveedor>(entity =>

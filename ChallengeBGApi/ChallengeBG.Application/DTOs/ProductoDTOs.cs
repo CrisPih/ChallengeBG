@@ -12,11 +12,13 @@ namespace ChallengeBG.Application.DTOs
     public record CreateProductoRequest(
         [Required(ErrorMessage = "El nombre es obligatorio")] string nombre,
         string? descripcion,
+        [Range(1, int.MaxValue, ErrorMessage = "Seleccione una categoría")] int categoriaId,
         [MinLength(1, ErrorMessage = "Agregue al menos un precio")] List<ProductoProveedorRequest> precios);
 
     public record UpdateProductoRequest(int id,
         [Required(ErrorMessage = "El nombre es obligatorio")] string nombre,
         string? descripcion,
+        [Range(1, int.MaxValue, ErrorMessage = "Seleccione una categoría")] int categoriaId,
         [MinLength(1, ErrorMessage = "Agregue al menos un precio")] List<ProductoProveedorRequest> precios);
     #endregion
 
@@ -24,7 +26,7 @@ namespace ChallengeBG.Application.DTOs
     public record GetProductoProveedorResponse(int proveedorId, string proveedorNombre, string numeroLote,
         decimal precio, int stock);
 
-    public record GetProductoResponse(int id, string nombre, string? descripcion,
-        List<GetProductoProveedorResponse> precios);
+    public record GetProductoResponse(int id, string nombre, string? descripcion,int categoriaId, string categoriaNombre,
+    List<GetProductoProveedorResponse> precios);
     #endregion
 }
